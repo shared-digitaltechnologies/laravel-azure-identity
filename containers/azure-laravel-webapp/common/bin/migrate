@@ -1,0 +1,26 @@
+#!/bin/sh
+
+
+export IS_MIGRATE='1'
+export BROADCAST_DRIVER='null'
+export CACHE_DRIVER='array'
+export SCOUT_DRIVER='null'
+export SESSION_DRIVER='array'
+export QUEUE_CONNECTION='sync'
+export LOG_CHANNEL='stderr'
+export FILESYSTEM_DISK='local'
+export LIGHTHOUSE_CACHE_ENABLE='false'
+export LIGHTHOUSE_SUBSCRIPTION_STORAGE='array'
+export LIGHTHOUSE_QUERY_CACHE_ENABLE='false'
+export LIGHTHOUSE_QUEUE_BROADCASTS='false'
+export DB_CONNECTION="${DB_CONNECTION:-pgsql}"
+export OTEL_SDK_DISABLED='true'
+export OTEL_TRACES_EXPORTER='none'
+export OTEL_LOGS_EXPORTER='none'
+export OTEL_METRICS_EXPORTER='none'
+export OTEL_TRACES_SAMPLER='always_off'
+
+(
+    cd "$PROJECT_ROOT" || exit
+    php artisan migrate --force "$@"
+)

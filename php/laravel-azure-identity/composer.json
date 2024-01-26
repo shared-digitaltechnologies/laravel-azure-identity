@@ -1,0 +1,75 @@
+{
+    "name": "shrd/laravel-azure-identity",
+    "version": "0.1.0",
+    "readme": "README.md",
+    "license": "UNLICENSED",
+    "keywords": ["laravel", "azure"],
+    "authors": [
+        {
+            "name": "Roel Hemerik",
+            "email": "roel@shared.nl"
+        }
+    ],
+    "require": {
+        "php": ">= 8.2",
+        "guzzlehttp/guzzle": "^7.8",
+        "thecodingmachine/safe": "^2.5.0",
+        "nesbot/carbon": "^2.72.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "psalm/phar": "^5.20"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shrd\\Laravel\\Azure\\Identity\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shrd\\Laravel\\Azure\\Identity\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shrd\\Laravel\\Azure\\Identity\\ServiceProvider"
+            ],
+            "aliases": {
+                "AzureCredential": "Shrd\\Laravel\\Azure\\Identity\\Facades\\AzureCredential"
+            }
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "shrd/*": true,
+            "meeva/composer-monorepo-builder-path-plugin": true
+        },
+        "lock": false,
+        "archive-format": "zip",
+        "archive-dir": "../../../dist/composer-archives/laravel-azure-identity",
+        "bin-dir": "../../../vendor/bin",
+        "vendor-dir": "../../../vendor",
+        "use-parent-dir": true,
+        "discard-changes": false
+    },
+    "archive": {
+        "name": "laravel-azure-identity",
+        "exclude": [
+            "/project.json",
+            "/vendor",
+            "tmp/",
+            "*.log",
+            ".phpunit.cache/",
+            ".phpunit.result.cache",
+            ".DS_Store",
+            ".idea"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

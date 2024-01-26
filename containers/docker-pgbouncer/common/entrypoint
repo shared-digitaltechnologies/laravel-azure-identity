@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+# shellcheck source=./generate-pgbouncer-configuration.sh
+. /usr/local/startup/generate-pgbouncer-configuration.sh
+
+echo "Starting $*..."
+
+exec "$@"

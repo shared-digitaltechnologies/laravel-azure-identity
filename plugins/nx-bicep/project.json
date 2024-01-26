@@ -1,0 +1,52 @@
+{
+    "name": "nx-bicep",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/plugins/nx-bicep/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/packages/plugins/nx-bicep",
+                "main": "packages/plugins/nx-bicep/src/index.ts",
+                "tsConfig": "packages/plugins/nx-bicep/tsconfig.lib.json",
+                "assets": [
+                    "packages/plugins/nx-bicep/*.md",
+                    {
+                        "input": "./packages/plugins/nx-bicep/src",
+                        "glob": "**/!(*.ts)",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./packages/plugins/nx-bicep/src",
+                        "glob": "**/*.d.ts",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./packages/plugins/nx-bicep",
+                        "glob": "generators.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "./packages/plugins/nx-bicep",
+                        "glob": "executors.json",
+                        "output": "."
+                    }
+                ]
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "packages/plugins/nx-bicep/jest.config.ts"
+            }
+        }
+    },
+    "tags": []
+}

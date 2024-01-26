@@ -1,0 +1,24 @@
+{
+    "generators": {
+        "library": {
+            "factory": "./src/generators/library/generator",
+            "schema": "./src/generators/library/schema.json",
+            "description": "library generator"
+        },
+        "init": {
+            "factory": "./src/generators/init/generator",
+            "schema": "./src/generators/init/schema.json",
+            "description": "init generator"
+        },
+        "phpunit": {
+            "factory": "./src/generators/phpunit/generator",
+            "schema": "./src/generators/phpunit/schema.json",
+            "description": "phpunit generator"
+        },
+        "psalm": {
+            "factory": "./src/generators/psalm/generator",
+            "schema": "./src/generators/psalm/schema.json",
+            "description": "psalm generator"
+        }
+    }
+}

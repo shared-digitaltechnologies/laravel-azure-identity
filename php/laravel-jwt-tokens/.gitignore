@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+
+# phpunit
+.phpunit.cache/
+.phpunit.result.cache
+
+# composer
+/vendor

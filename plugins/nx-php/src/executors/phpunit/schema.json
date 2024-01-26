@@ -1,0 +1,462 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "version": 2,
+    "title": "Phpunit executor schema",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "cmd": {
+            "type": "string",
+            "description": "Location of the phpunit binary (relative to the project root.)",
+            "default": "./vendor/bin/phpunit"
+        },
+        "cwd": {
+            "type": "string",
+            "description": "The current working directory of the phpunit process. (defaults to the workspace root.)"
+        },
+        "files": {
+            "type": "array",
+            "description": "The test files or directories to test.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "bootstrap": {
+            "type": "string",
+            "description": "A PHP script that is included before the tests run"
+        },
+        "configurationFile": {
+            "type": "string",
+            "description": "Read configuration from XML file.",
+            "x-completion-type": "file",
+            "x-completion-glob": "*phpunit*.xml",
+            "x-priority": "important"
+        },
+        "noConfiguration": {
+            "type": "boolean",
+            "description": "Ignore default configuration file (phpunit.xml)",
+            "default": false
+        },
+        "noExtensions": {
+            "type": "boolean",
+            "description": "Do not load PHPUnit extensions",
+            "default": false
+        },
+        "includePath": {
+            "type": "array",
+            "description": "Prepend PHP's include_path with the given paths.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "phpConfig": {
+            "type": "object",
+            "description": "Set php.ini values for this test run.",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "cacheDirectory": {
+            "type": "string",
+            "description": "Specify cache directory"
+        },
+        "useBaseline": {
+            "type": "string",
+            "description": "Use baseline to ignore issues"
+        },
+        "ignoreBaseline": {
+            "type": "boolean",
+            "description": "Do not use baseline to ignore issues",
+            "default": false
+        },
+        "testsuites": {
+            "type": "array",
+            "description": "Only run tests from the specified test suites.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "excludeTestsuites": {
+            "type": "array",
+            "description": "Exclude tests from the specified test suites.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "groups": {
+            "type": "array",
+            "description": "Only run tests from the specified groups.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "excludeGroups": {
+            "type": "array",
+            "description": "Exclude tests form the specified groups.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "covers": {
+            "type": "string",
+            "description": "Only run tests that intend to cover the provided name."
+        },
+        "uses": {
+            "type": "string",
+            "description": "Only run tests that intend to use the provided name."
+        },
+        "filter": {
+            "type": "string",
+            "description": "Filter which tests to run"
+        },
+        "testSuffix": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Only search for test in files with the specified suffixes"
+        },
+        "processIsolation": {
+            "type": "boolean",
+            "description": "Run each test in a seperate PHP process",
+            "default": false
+        },
+        "globalsBackup": {
+            "type": "boolean",
+            "description": "Backup and restore $GLOBALS for each test",
+            "default": false
+        },
+        "staticBackup": {
+            "type": "boolean",
+            "description": "Backup and restore static properties for each test",
+            "default": false
+        },
+        "strictCoverage": {
+            "type": "boolean",
+            "description": "Be strict about code coverage metadata",
+            "default": false
+        },
+        "strictGlobalState": {
+            "type": "boolean",
+            "description": "Be strict about changes to global state",
+            "default": false
+        },
+        "disallowTestOutput": {
+            "type": "boolean",
+            "description": "Be strict about output during tests",
+            "default": false
+        },
+        "enforceTimeLimit": {
+            "type": "boolean",
+            "description": "Enforce time limit based on test size",
+            "default": false
+        },
+        "defaultTimeLimit": {
+            "type": "integer",
+            "description": "Timeout in seconds for tests that have no declared size"
+        },
+        "dontReportUselessTests": {
+            "type": "boolean",
+            "description": "Do not report tests that do not test anything",
+            "default": false
+        },
+        "stopOn": {
+            "type": "object",
+            "description": "Stops after first ...",
+            "default": {},
+            "properties": {
+                "defect": {
+                    "type": "boolean",
+                    "description": "Stop after first error, failure, waring or risky test",
+                    "default": false
+                },
+                "error": {
+                    "type": "boolean",
+                    "description": "Stop after first error",
+                    "default": false
+                },
+                "failure": {
+                    "type": "boolean",
+                    "description": "Stop after first failure",
+                    "default": false
+                },
+                "warning": {
+                    "type": "boolean",
+                    "description": "Stop after first warning",
+                    "default": false
+                },
+                "risky": {
+                    "type": "boolean",
+                    "description": "Stop after first risky test",
+                    "default": false
+                },
+                "deprecation": {
+                    "type": "boolean",
+                    "description": "Stop after first test that triggered a deprecation",
+                    "default": false
+                },
+                "notice": {
+                    "type": "boolean",
+                    "description": "Stop after first test that triggered a notice",
+                    "default": false
+                },
+                "skipped": {
+                    "type": "boolean",
+                    "description": "Stop after first skipped test",
+                    "default": false
+                },
+                "incomplete": {
+                    "type": "boolean",
+                    "description": "Stop after first incomplete test",
+                    "default": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "failOn": {
+            "type": "object",
+            "description": "Signal failure using shell exit code when ...",
+            "default": {},
+            "properties": {
+                "warning": {
+                    "type": "boolean",
+                    "description": "Signal failure using shell exit code when a warning was triggered",
+                    "default": false
+                },
+                "risky": {
+                    "type": "boolean",
+                    "description": "Signal failure using shell exit code when a test was considered risky",
+                    "default": false
+                },
+                "deprecation": {
+                    "type": "boolean",
+                    "description": "Signal failure using shell exit code when a notice was triggered",
+                    "default": false
+                },
+                "skipped": {
+                    "type": "boolean",
+                    "description": "Signal failure using shell exit code when a test was skipped",
+                    "default": false
+                },
+                "incomplete": {
+                    "type": "boolean",
+                    "description": "Signal failure using shell exit code when a test was marked incomplete",
+                    "default": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "cacheResult": {
+            "type": "boolean",
+            "description": "Write test results to cache file",
+            "default": false
+        },
+        "doNotCacheResult": {
+            "type": "boolean",
+            "description": "Do not write test results to cache file",
+            "default": false
+        },
+        "orderBy": {
+            "type": "string",
+            "description": "Run tests in order",
+            "enum": [
+                "default",
+                "defects",
+                "depends",
+                "duration",
+                "no-depends",
+                "random",
+                "reverse",
+                "size"
+            ]
+        },
+        "randomOrderSeed": {
+            "type": "integer",
+            "description": "Use the specified random seed when running tests in random order"
+        },
+        "colors": {
+            "type": "string",
+            "description": "Use colors in output",
+            "enum": ["never", "auto", "always"],
+            "default": "always"
+        },
+        "columns": {
+            "type": "integer",
+            "description": "Number of columns to use for progress output"
+        },
+        "stderr": {
+            "type": "boolean",
+            "description": "Write to STDERR instead of STDOUT",
+            "default": false
+        },
+        "noProgress": {
+            "type": "boolean",
+            "description": "Disable output for test execution progress",
+            "default": false
+        },
+        "noResults": {
+            "type": "boolean",
+            "description": "Disable output for test results",
+            "default": false
+        },
+        "noOutput": {
+            "type": "boolean",
+            "description": "Disable all output",
+            "default": false
+        },
+        "display": {
+            "type": "object",
+            "description": "Display details for certain tests",
+            "default": {},
+            "properties": {
+                "incomplete": {
+                    "type": "boolean",
+                    "description": "Display details for incomplete tests",
+                    "default": false
+                },
+                "skipped": {
+                    "type": "boolean",
+                    "description": "Display details for skipped tests",
+                    "default": false
+                },
+                "deprecations": {
+                    "type": "boolean",
+                    "description": "Display details for deprecations triggered by tests",
+                    "default": false
+                },
+                "errors": {
+                    "type": "boolean",
+                    "description": "Display details for errors triggered by tests",
+                    "default": false
+                },
+                "notices": {
+                    "type": "boolean",
+                    "description": "Display details for notices triggerd by tests",
+                    "default": false
+                },
+                "warnings": {
+                    "type": "boolean",
+                    "description": "Display details for warings triggerd by tests",
+                    "default": false
+                },
+                "reverse": {
+                    "type": "boolean",
+                    "description": "Print defects in reverse order",
+                    "default": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "teamCity": {
+            "type": "boolean",
+            "description": "Replace default progress and result output with TeamCity format",
+            "default": false
+        },
+        "testDox": {
+            "type": "boolean",
+            "description": "Replace default result output with TestDox format",
+            "default": false
+        },
+        "debug": {
+            "type": "boolean",
+            "description": "Replace default progress and result output with debugging information",
+            "default": false
+        },
+        "log": {
+            "type": "object",
+            "description": "Write test results to files",
+            "default": {},
+            "properties": {
+                "junit": {
+                    "type": "string",
+                    "description": "Write test results in JUnit XML format to file"
+                },
+                "teamcity": {
+                    "type": "string",
+                    "description": "Write test results in TeamCity format to file"
+                },
+                "testdoxHtml": {
+                    "type": "string",
+                    "description": "Write test results in TestDox format (HTML) to file"
+                },
+                "testdoxText": {
+                    "type": "string",
+                    "description": "Write test results in TestDox format (plain text) to file"
+                },
+                "eventsText": {
+                    "type": "string",
+                    "description": "Stream events as plain text to file"
+                },
+                "eventsVerboseText": {
+                    "type": "string",
+                    "description": "Stream events as plain text with extended information to file"
+                }
+            },
+            "additionalProperties": false
+        },
+        "noLogging": {
+            "type": "boolean",
+            "description": "Ignore logging configured in the XML configuration file",
+            "default": false
+        },
+        "coverage": {
+            "type": "object",
+            "description": "Write code coverage report to files",
+            "properties": {
+                "clover": {
+                    "type": "string",
+                    "description": "Write code coverage report in Clover XML format to file"
+                },
+                "cobertura": {
+                    "type": "string",
+                    "description": "Write code coverage report in Cobertura XML format to file"
+                },
+                "crap4j": {
+                    "type": "string",
+                    "description": "Write code coverage report in Crap4J XML format to file"
+                },
+                "html": {
+                    "type": "string",
+                    "description": "Write code coverage report in HTML format to directory"
+                },
+                "php": {
+                    "type": "string",
+                    "description": "Write serialized code coverage data to file"
+                },
+                "text": {
+                    "type": "string",
+                    "description": "Write code coverage report in text format to file"
+                },
+                "xml": {
+                    "type": "string",
+                    "description": "Write code coverage report in XML format to directory"
+                }
+            },
+            "additionalProperties": false
+        },
+        "warmCoverageCache": {
+            "type": "string",
+            "description": "Warm static analysis cache"
+        },
+        "coverageFilter": {
+            "type": "string",
+            "description": "Include directory in code coverage reporting"
+        },
+        "pathCoverage": {
+            "type": "boolean",
+            "description": "Report path coverage in addition to line coverage",
+            "default": false
+        },
+        "disableCoverageIgnore": {
+            "type": "boolean",
+            "description": "Disable metadata for ignoring code coverage",
+            "default": false
+        },
+        "noCoverage": {
+            "type": "boolean",
+            "description": "Ignore code coverage reporting configured in the XML configuration file",
+            "default": false
+        }
+    },
+    "required": []
+}

@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "Library",
+    "title": "",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the package. (example: 'my-php-library')",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "What name would you like to use?"
+        },
+        "packageNamespace": {
+            "type": "string",
+            "description": "The namespace of the composer package name. (example: shrd)",
+            "x-prompt": {
+                "message": "What should the namespace be for the composer package name? (example: shrd)",
+                "type": "string"
+            }
+        },
+        "directory": {
+            "type": "string",
+            "description": "The place where the directory will be generated. (example: 'packages/feature/my-php-library')",
+            "x-prompt": {
+                "message": "Where should the package root be? (example: 'packages/feature/my-php-library')",
+                "type": "string"
+            }
+        },
+        "namespace": {
+            "type": "string",
+            "description": "The root namespace of the library. (example 'Shrd\\Laravel\\MyPhpLibrary')",
+            "x-prompt": {
+                "message": "What should be the php namespace of the package? (example 'Shrd\\Laravel\\MyPhpLibrary')",
+                "type": "string"
+            }
+        },
+        "testing": {
+            "enum": ["phpunit", "pest", "none"],
+            "description": "The testing framework for the php library. [none|phpunit|pest]",
+            "x-prompt": {
+                "message": "Which testing framework are you going to use?",
+                "type": "list",
+                "items": [
+                    {
+                        "value": "phpunit",
+                        "label": "PHPUnit [reccomended]"
+                    },
+                    {
+                        "value": "pest",
+                        "label": "Pest"
+                    },
+                    {
+                        "value": "none",
+                        "label": "None"
+                    }
+                ]
+            }
+        },
+        "typechecker": {
+            "enum": ["psalm", "phpstan", "none"],
+            "description": "The static typechecking analysis library. [none|psalm|phpstan]",
+            "x-prompt": {
+                "message": "Which typechecker do you want to use?",
+                "type": "list",
+                "items": [
+                    {
+                        "value": "psalm",
+                        "label": "Psalm [reccomended]"
+                    },
+                    {
+                        "value": "phpstan",
+                        "label": "PHPStan"
+                    },
+                    {
+                        "value": "none",
+                        "lavel": "None"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "name",
+        "packageNamespace",
+        "directory",
+        "namespace",
+        "testing",
+        "typechecker"
+    ]
+}

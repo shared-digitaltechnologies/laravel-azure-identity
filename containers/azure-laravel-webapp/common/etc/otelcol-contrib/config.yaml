@@ -1,0 +1,51 @@
+receivers:
+    otlp:
+        protocols:
+            grpc:
+
+processors:
+    batch:
+
+    attributes/app:
+        actions:
+            - key: service
+              action: insert
+              value: ${env:WEBSITE_SITE_NAME}
+            - key: environment
+              action: insert
+              value: ${env:APP_ENV}
+
+exporters:
+    otlp/jaeger:
+        endpoint: jaeger:4317
+        tls:
+            insecure: true
+
+    debug:
+
+extensions:
+    health_check:
+    zpages:
+
+service:
+    extensions: [zpages, health_check]
+    telemetry:
+        logs:
+            level: debug
+            initial_fields:
+                service: ${env:WEBSITE_SITE_NAME}-otelcol
+        metrics:
+            level: normal
+    pipelines:
+        traces:
+            receivers: [otlp]
+            processors: [batch, attributes/app]
+            exporters: [otlp/jaeger]
+        metrics:
+            receivers: [otlp]
+            processors: [batch, attributes/app]
+            exporters: [debug]
+        logs:
+            receivers: [otlp]
+            processors: [batch, attributes/app]
+            exporters: [debug]

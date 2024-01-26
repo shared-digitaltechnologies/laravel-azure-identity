@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "version": 2,
+    "title": "SchemaToTypescript executor",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "schemaFile": {
+            "type": "string",
+            "description": "The json schema file to parse"
+        }
+    },
+    "required": []
+}

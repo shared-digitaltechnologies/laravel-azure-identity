@@ -1,0 +1,5 @@
+project.json
+build.sh
+examples/**/*
+README.md
+bicep/**/*

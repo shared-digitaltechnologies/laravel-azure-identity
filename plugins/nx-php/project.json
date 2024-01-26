@@ -1,0 +1,56 @@
+{
+    "name": "nx-php",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/plugins/nx-php/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/packages/plugins/nx-php",
+                "main": "packages/plugins/nx-php/src/index.ts",
+                "tsConfig": "packages/plugins/nx-php/tsconfig.lib.json",
+                "assets": [
+                    "packages/plugins/nx-php/*.md",
+                    {
+                        "input": "./packages/plugins/nx-php/src",
+                        "glob": "**/!(*.ts)",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./packages/plugins/nx-php/src",
+                        "glob": "**/*.d.ts",
+                        "output": "./src"
+                    },
+                    {
+                        "input": "./packages/plugins/nx-php",
+                        "glob": "generators.json",
+                        "output": "."
+                    },
+                    {
+                        "input": "./packages/plugins/nx-php",
+                        "glob": "executors.json",
+                        "output": "."
+                    }
+                ]
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
+        },
+        "publish": {
+            "command": "node tools/scripts/publish.mjs nx-php {args.ver} {args.tag}",
+            "dependsOn": ["build"]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "packages/plugins/nx-php/jest.config.ts"
+            }
+        }
+    },
+    "tags": []
+}

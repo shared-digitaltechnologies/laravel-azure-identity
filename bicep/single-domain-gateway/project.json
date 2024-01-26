@@ -1,0 +1,25 @@
+{
+    "name": "bicep-single-domain-gateway",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/bicep/single-domain-gateway/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@shrd/nx-bicep:build",
+            "outputs": ["{options.outputPath}"],
+            "inputs": ["{projectRoot}/src/main.bicep"],
+            "options": {
+                "file": "packages/bicep/single-domain-gateway/src/main.bicep",
+                "outputPath": "dist/packages/bicep/single-domain-gateway/",
+                "noRestore": false
+            }
+        },
+        "lint": {
+            "executor": "@shrd/nx-bicep:lint",
+            "inputs": ["{projectRoot}/src/main.bicep"],
+            "options": {
+                "file": "packages/bicep/single-domain-gateway/src/main.bicep"
+            }
+        }
+    }
+}

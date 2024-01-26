@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+# OPTIMIZE THE APPLICATION
+# shellcheck source=../startup/run-startup-optimisations.sh
+. /usr/local/startup/run-startup-optimisations.sh
+
+# RUN PHP-FPM
+/usr/local/sbin/php-fpm "$@"

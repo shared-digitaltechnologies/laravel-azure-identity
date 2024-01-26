@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="../../../vendor/autoload.php"
+         cacheResultFile="../../../.phpunit.cache/packages/php/laravel-microsoft-graph-mailer/cache.result"
+         colors="true">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+    <coverage cacheDirectory="../../../.phpunit.cache/packages/php/laravel-microsoft-graph-mailer"
+              includeUncoveredFiles="true"
+              ignoreDeprecatedCodeUnits="false"
+              pathCoverage="false"
+              disableCodeCoverageIgnore="false">
+        <report>
+            <html outputDirectory="../../../coverage/packages/php/laravel-microsoft-graph-mailer/html-coverage"
+                  lowUpperBound="50"
+                  highLowerBound="90" />
+            <text outputFile="../../../coverage/packages/php/laravel-microsoft-graph-mailer/coverage.txt"
+                  showUncoveredFiles="false"
+                  showOnlySummary="true" />
+        </report>
+    </coverage>
+    <php>
+        <env name="APP_ENV" value="testing" force="true" />
+        <env name="DB_CONNECTION" value="testing" force="true" />
+        <env name="AZURE_TENANT_ID" value="a334c4c2-e5bf-4750-8afb-732cfd8270f4" />
+        <env name="AZURE_CLIENT_ID" value="9b9be589-918a-4e5f-9caf-719815f015d5" />
+        <env name="AZURE_CLIENT_SECRET" value="" />
+    </php>
+</phpunit>
