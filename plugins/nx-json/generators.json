@@ -1,9 +1,0 @@
-{
-    "generators": {
-        "schema-to-typescript": {
-            "factory": "./src/generators/schema-to-typescript/generator",
-            "schema": "./src/generators/schema-to-typescript/schema.json",
-            "description": "schema-to-typescript generator"
-        }
-    }
-}

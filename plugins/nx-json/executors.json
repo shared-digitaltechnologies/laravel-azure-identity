@@ -1,9 +1,0 @@
-{
-    "executors": {
-        "schema-to-typescript": {
-            "implementation": "./src/executors/schema-to-typescript/executor",
-            "schema": "./src/executors/schema-to-typescript/schema.json",
-            "description": "schema-to-typescript executor"
-        }
-    }
-}

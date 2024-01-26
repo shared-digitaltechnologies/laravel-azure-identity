@@ -1,9 +1,0 @@
-{
-    "executors": {
-        "blob-upload-directory": {
-            "implementation": "./src/executors/blob-upload-directory/executor",
-            "schema": "./src/executors/blob-upload-directory/schema.json",
-            "description": "blob-upload-directory executor"
-        }
-    }
-}
