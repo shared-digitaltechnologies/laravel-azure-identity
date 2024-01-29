@@ -64,7 +64,7 @@ class CacheTokenCredential implements TokenCredential
                                 ?DateInterval $cacheTtlLeeway = null,
                                 ?DateInterval $defaultCacheTtl = null)
     {
-        $this->cachePrefix     = $cachePrefix ?? 'azure_credentials:token:';
+        $this->cachePrefix     = $cachePrefix ?? 'azure_identity:token:';
         $this->cacheTtlLeeway  = $cacheTtlLeeway ?? CarbonInterval::minute();
         $this->defaultCacheTtl = $defaultCacheTtl;
     }

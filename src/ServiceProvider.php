@@ -30,7 +30,7 @@ class ServiceProvider extends BaseServiceProvider {
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/azure-credentials.php' => config_path('azure-credentials.php')
+            __DIR__.'/../config/azure-identity.php' => config_path('azure-identity.php')
         ]);
 
         if($this->app->runningInConsole()) {

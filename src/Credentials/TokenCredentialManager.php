@@ -95,7 +95,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     public function getDefaultCacheStore(): ?string
     {
-        return $this->config->get('azure-credentials.cache.store');
+        return $this->config->get('azure-identity.cache.store');
     }
 
     /**
@@ -106,7 +106,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
     public function getCacheTtlLeeway(): CarbonInterval
     {
         return CarbonInterval::fromString(
-            $this->config->get('azure-credentials.cache.ttl_leeway', '1 minute')
+            $this->config->get('azure-identity.cache.ttl_leeway', '1 minute')
         );
     }
 
@@ -117,7 +117,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     public function getDefaultCacheTtl(): ?CarbonInterval
     {
-        return CarbonInterval::make($this->config->get('azure-credentials.cache.ttl', '1 hour'));
+        return CarbonInterval::make($this->config->get('azure-identity.cache.ttl', '1 hour'));
     }
 
     /**
@@ -132,7 +132,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
         return new CacheTokenCredential(
             driver: $this->driver($driver),
             cache: $this->cacheFactory->store($store ?? $this->getDefaultCacheStore()),
-            cachePrefix: $this->config->get('azure-credentials.cache.prefix'),
+            cachePrefix: $this->config->get('azure-identity.cache.prefix'),
             cacheTtlLeeway: $this->getCacheTtlLeeway(),
             defaultCacheTtl: $this->getDefaultCacheTtl(),
         );
@@ -145,7 +145,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     public function getDefaultDriver(): string
     {
-        return $this->config->get('azure-credentials.driver', 'default');
+        return $this->config->get('azure-identity.driver', 'default');
     }
 
     protected function callCustomCreator($driver)
@@ -196,7 +196,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     protected function createDefaultDriver(): TokenCredentialDriver
     {
-        $config = $this->config->get('azure-credentials', []);
+        $config = $this->config->get('azure-identity', []);
 
         if(isset($config['identity_endpoint']) && isset($config['identity_header'])) {
             return $this->createManagedIdentityDriver();
@@ -218,9 +218,9 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
     protected function createCliDriver(): AzureCliCredentialDriver
     {
         return new AzureCliCredentialDriver(
-            azPath: $this->config->get('azure-credentials.az_path', 'az'),
-            subscriptionId: $this->config->get('azure-credentials.subscription_id'),
-            tenantId: $this->config->get('azure-credentials.tenant_id'),
+            azPath: $this->config->get('azure-identity.az_path', 'az'),
+            subscriptionId: $this->config->get('azure-identity.subscription_id'),
+            tenantId: $this->config->get('azure-identity.tenant_id'),
         );
     }
 
@@ -232,10 +232,10 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
         return ManagedIdentityCredentialDriver::forAppService(
             httpClient: $this->container->make(ClientInterface::class),
             requestFactory: $this->container->make(RequestFactoryInterface::class),
-            identityEndpointValue: $this->config->get('azure-credentials.identity_endpoint'),
-            identityHeaderValue: $this->config->get('azure-credentials.identity_header'),
-            clientId: $this->config->get('azure-credentials.client_id'),
-            resourceId: $this->config->get('azure-credentials.resource_id')
+            identityEndpointValue: $this->config->get('azure-identity.identity_endpoint'),
+            identityHeaderValue: $this->config->get('azure-identity.identity_header'),
+            clientId: $this->config->get('azure-identity.client_id'),
+            resourceId: $this->config->get('azure-identity.resource_id')
         );
     }
 
@@ -244,7 +244,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     protected function createSecretDriver(): ClientSecretCredentialDriverDriver
     {
-        $config = $this->config->get('azure-credentials', []);
+        $config = $this->config->get('azure-identity', []);
 
         return ClientSecretCredentialDriverDriver::forAzureTenant(
             httpClient: $this->container->make(ClientInterface::class),
@@ -261,7 +261,7 @@ class TokenCredentialManager implements TokenCredentialDriverFactory
      */
     protected function createPasswordDriver(): PasswordCredentialDriverDriver
     {
-        $config = $this->config->get('azure-credentials', []);
+        $config = $this->config->get('azure-identity', []);
 
         return PasswordCredentialDriverDriver::forAzureTenant(
             httpClient: $this->container->make(ClientInterface::class),
