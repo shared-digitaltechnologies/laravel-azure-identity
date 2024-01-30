@@ -38,7 +38,7 @@ class ManagedIdentityCredentialDriver extends RequestCredentialDriver
             endpoint: $identityEndpointValue ?? $_ENV['IDENTITY_ENDPOINT'],
             apiVersion: self::APP_SERVICE_MSI_API_VERSION,
             headers: [
-                "X-IDENTITY_HEADER" => $identityHeaderValue ?? $_ENV['IDENTITY_HEADER']
+                "X-IDENTITY-HEADER" => $identityHeaderValue ?? $_ENV['IDENTITY_HEADER']
             ],
             parameters: $parameters
         );

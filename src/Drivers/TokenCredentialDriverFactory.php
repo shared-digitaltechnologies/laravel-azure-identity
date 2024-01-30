@@ -98,6 +98,16 @@ class TokenCredentialDriverFactory
         return $this->createCliDriver($config);
     }
 
+    protected function createConstantDriver(array $config): ClosureCredentialDriver
+    {
+        return ClosureCredentialDriver::constant($config);
+    }
+
+    protected function createEmptyDriver(array $config): ClosureCredentialDriver
+    {
+        return ClosureCredentialDriver::empty();
+    }
+
     protected function createPasswordDriver(array $config): PasswordCredentialDriverDriver
     {
         return PasswordCredentialDriverDriver::forAzureTenant(

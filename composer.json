@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5",
-        "psalm/phar": "^5.20"
+        "psalm/phar": "^5.20",
+        "orchestra/testbench": "^8.21"
     },
     "autoload": {
         "psr-4": {
