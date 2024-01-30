@@ -107,7 +107,6 @@ class CacheTokenCredential implements TokenCredential
 
         // Fetch the token using the driver.
         $token = $this->driver->fetchToken($scope);
-
         // Store the token in the cache.
         $this->setToken($scope, $token, $cache);
 
@@ -123,16 +122,16 @@ class CacheTokenCredential implements TokenCredential
      * @return void
      * @throws InvalidArgumentException
      */
-    public function setToken(AzureScope $scope, AccessToken $token, ?bool $cache = false): void
+    public function setToken(AzureScope $scope, AccessToken $token, bool $cache = false): void
     {
         $this->inMemoryCache[$scope->getCacheKey()] = $token;
 
-        if(!$cache) return;
+        if(!$cache || !$this->cache) return;
 
         $ttl = $token->expiresIn?->sub($this->cacheTtlLeeway) ?? $this->defaultCacheTtl;
         if(!$ttl) return;
 
-        $this->cache?->set($this->getCacheKey($scope), serialize($scope), $ttl);
+        $this->cache->set($this->getCacheKey($scope), $token, $ttl);
     }
 
     /**
