@@ -1,7 +1,7 @@
 {
     "name": "shrd/laravel-azure-identity",
     "description": "Automatically handle authentication to Azure Services for Laravel.",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "readme": "README.md",
     "license": "proprietary",
     "keywords": ["laravel", "azure"],
