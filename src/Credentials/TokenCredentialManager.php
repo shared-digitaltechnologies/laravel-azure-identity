@@ -118,7 +118,8 @@ class TokenCredentialManager implements TokenCredentialFactory
         $credential ??= $this->defaultCredential;
 
         if (!isset($this->credentials[$credential])) {
-            $this->credentials[$credential] = $this->createCredential($credential);
+            $config = $this->getCredentialConfig($credential);
+            $this->credentials[$credential] = $this->createCredential($config);
         }
 
         return $this->credentials[$credential];
@@ -157,13 +158,10 @@ class TokenCredentialManager implements TokenCredentialFactory
     /**
      * Creates a new token credential.
      *
-     * @param string $credential
      * @return TokenCredential
      */
-    public function createCredential(string $credential): TokenCredential
+    public function createCredential(array $config): TokenCredential
     {
-        $config = $this->getCredentialConfig($credential);
-
         $cacheConfig = $config['cache'];
 
         $cacheEnabled = $cacheConfig['enabled'] ?? $this->defaultCacheConfig['enabled'] ?? false;
@@ -172,7 +170,7 @@ class TokenCredentialManager implements TokenCredentialFactory
             $cacheStore = empty($cacheConfig['store']) ? $this->getDefaultCacheStore() : $cacheConfig['store'];
 
             $cachePrefix = empty($cacheConfig['prefix'])
-                ? ($this->defaultCacheConfig['prefix'] ?? '') . $credential . ':'
+                ? ($this->defaultCacheConfig['prefix'] ?? '') . ':'
                 : $cacheConfig['prefix'];
 
             $cacheTtlLeeway = empty($cacheConfig['ttl_leeway'])
