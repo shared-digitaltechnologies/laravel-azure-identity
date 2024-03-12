@@ -3,7 +3,7 @@
 namespace Shrd\Laravel\Azure\Identity\Tests\Unit\Tokens;
 
 use Shrd\Laravel\Azure\Identity\Tokens\AccessToken;
-use Shrd\Laravel\Azure\Storage\Tests\TestCase;
+use Shrd\Laravel\Azure\Identity\Tests\TestCase;
 
 class AccessTokenTest extends TestCase
 {

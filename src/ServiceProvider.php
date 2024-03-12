@@ -6,7 +6,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Shrd\Laravel\Azure\Identity\Contracts\TokenCredential;
 use Shrd\Laravel\Azure\Identity\Contracts\TokenCredentialDriver;
-use Shrd\Laravel\Azure\Identity\Contracts\TokenCredentialDriverFactory;
+use Shrd\Laravel\Azure\Identity\Contracts\TokenCredentialFactory;
 use Shrd\Laravel\Azure\Identity\Credentials\TokenCredentialManager;
 
 class ServiceProvider extends BaseServiceProvider {
@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider {
     public function register(): void
     {
         $this->app->singleton(TokenCredentialManager::class);
-        $this->app->bind(TokenCredentialDriverFactory::class, TokenCredentialManager::class);
+        $this->app->bind(TokenCredentialFactory::class, TokenCredentialManager::class);
 
         $this->app->singleton(AzureCredentialService::class);
 

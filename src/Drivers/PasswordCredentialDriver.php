@@ -7,22 +7,24 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Shrd\Laravel\Azure\Identity\Scopes\AzureScope;
 
-class ClientSecretCredentialDriverDriver extends OAuthRequestCredentialDriver
+class PasswordCredentialDriver extends OAuthRequestCredentialDriver
 {
     public function __construct(ClientInterface $httpClient,
                                 RequestFactoryInterface $requestFactory,
                                 StreamFactoryInterface $streamFactory,
                                 string $token_endpoint,
                                 string $client_id,
-                                public readonly string $client_secret)
+                                public readonly string $username,
+                                public readonly string $password,
+                                public readonly string|null $client_secret = null)
     {
         parent::__construct(
             httpClient: $httpClient,
             requestFactory: $requestFactory,
             streamFactory: $streamFactory,
             token_endpoint: $token_endpoint,
-            grant_type: 'client_credentials',
-            client_id: $client_id,
+            grant_type: 'password',
+            client_id: $client_id
         );
     }
 
@@ -31,7 +33,9 @@ class ClientSecretCredentialDriverDriver extends OAuthRequestCredentialDriver
                                           StreamFactoryInterface $streamFactory,
                                           string $tenant_id,
                                           string $client_id,
-                                          string $client_secret): self
+                                          string $username,
+                                          string $password,
+                                          string|null $client_secret = null): self
     {
         return new self(
             httpClient: $httpClient,
@@ -39,14 +43,22 @@ class ClientSecretCredentialDriverDriver extends OAuthRequestCredentialDriver
             streamFactory: $streamFactory,
             token_endpoint: self::microsoftLoginTokenEndpoint($tenant_id),
             client_id: $client_id,
+            username: $username,
+            password: $password,
             client_secret: $client_secret
         );
     }
 
+
     public function getTokenRequestParameters(AzureScope $scope): array
     {
-        return [
-            "client_secret" => $this->client_secret
+        $parameters = [
+            "username" => $this->username,
+            "password" => $this->password,
         ];
+
+        if($this->client_secret) $parameters['client_secret'] = $this->client_secret;
+
+        return $parameters;
     }
 }

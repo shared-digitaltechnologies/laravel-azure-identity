@@ -14,16 +14,18 @@ use Shrd\Laravel\Azure\Identity\Tokens\AccessToken;
  * Facade for the AzureCredentialService
  *
  * @see AzureCredentialService
- * @method static AccessToken token(AzureScope|string|string[] $scope, ?string $driver = null)
- * @method static AccessToken refreshToken(AzureScope|string|string[] $scope, ?string $driver = null)
+ * @method static AccessToken token(AzureScope|string|string[] $scope, ?string $credential = null)
+ * @method static AccessToken refreshToken(AzureScope|string|string[] $scope, ?string $credential = null)
  * @method static void forgetToken(AzureScope|string|string[] $scope);
- * @method static AccessToken keyVaultToken(?string $driver = null)
- * @method static AccessToken webPubSubToken(?string $driver = null)
- * @method static AccessToken microsoftGraphToken(?string $driver = null)
- * @method static AccessToken storageAccountToken(?string $driver = null)
- * @method static AzureCredentialService extend(string $driver, Closure $callback);
- * @method static TokenCredentialDriver driver(?string $driver = null)
- * @method static TokenCredential credential(?string $driver = null)
+ * @method static AccessToken keyVaultToken(?string $credential = null)
+ * @method static AccessToken webPubSubToken(?string $credential = null)
+ * @method static AccessToken microsoftGraphToken(?string $credential = null)
+ * @method static AccessToken storageAccountToken(?string $credential = null)
+ * @method static AzureCredentialService extend(string $credential, Closure $callback);
+ * @method static TokenCredentialDriver driver(?string $credential = null)
+ * @method static TokenCredentialDriver createDriver(array $config)
+ * @method static TokenCredential credential(?string $credential = null)
+ * @method static TokenCredential createCredential(array $config)
  * @method static string getDefaultDriver()
  */
 class AzureCredential extends Facade
