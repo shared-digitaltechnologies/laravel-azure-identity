@@ -92,7 +92,7 @@ class TokenCredentialManager implements TokenCredentialFactory
             "ttl_leeway" => "1 minute"
         ]);
 
-        $this->cacheFactory = $cacheFactory ?? $this->container->get('cache');
+        $this->cacheFactory = $cacheFactory ?? $this->container->make('cache');
     }
 
     protected function getCredentialConfig(?string $credential = null): array
@@ -158,11 +158,12 @@ class TokenCredentialManager implements TokenCredentialFactory
     /**
      * Creates a new token credential.
      *
+     * @param array $config
      * @return TokenCredential
      */
     public function createCredential(array $config): TokenCredential
     {
-        $cacheConfig = $config['cache'];
+        $cacheConfig = $config['cache'] ?? [];
 
         $cacheEnabled = $cacheConfig['enabled'] ?? $this->defaultCacheConfig['enabled'] ?? false;
 

@@ -4,8 +4,8 @@ namespace Shrd\Laravel\Azure\Identity\Drivers;
 
 use Carbon\CarbonInterval;
 use Carbon\FactoryImmutable;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\HttpFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -29,11 +29,10 @@ class TokenCredentialDriverFactory
     public static function instance(): self
     {
         if(!self::$instance) {
-            $httpFactory = new HttpFactory();
             self::$instance = new self(
-                httpClient: new Client(),
-                requestFactory: $httpFactory,
-                streamFactory: $httpFactory,
+                httpClient: Psr18ClientDiscovery::find(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
                 clock: new FactoryImmutable,
                 clientCertificateFactory: new SimpleClientCertificateFactory,
             );

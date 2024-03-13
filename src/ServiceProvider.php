@@ -2,19 +2,26 @@
 
 namespace Shrd\Laravel\Azure\Identity;
 
+use Carbon\FactoryImmutable;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Psr\Clock\ClockInterface;
 use Shrd\Laravel\Azure\Identity\Certificates\SimpleClientCertificateFactory;
 use Shrd\Laravel\Azure\Identity\Contracts\ClientCertificateFactory;
 use Shrd\Laravel\Azure\Identity\Contracts\TokenCredential;
 use Shrd\Laravel\Azure\Identity\Contracts\TokenCredentialDriver;
 use Shrd\Laravel\Azure\Identity\Contracts\TokenCredentialFactory;
 use Shrd\Laravel\Azure\Identity\Credentials\TokenCredentialManager;
+use Wimski\LaravelPsrHttp\Providers\PsrHttpServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider {
 
     public function register(): void
     {
+        $this->app->register(PsrHttpServiceProvider::class);
+
+        $this->app->singletonIf(ClockInterface::class, fn() => new FactoryImmutable);
+
         $this->app->singleton(SimpleClientCertificateFactory::class);
         $this->app->bind(ClientCertificateFactory::class, SimpleClientCertificateFactory::class);
 
