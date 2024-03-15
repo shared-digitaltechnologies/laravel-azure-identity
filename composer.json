@@ -3,7 +3,10 @@
     "description": "Automatically handle authentication to Azure Services for Laravel.",
     "readme": "README.md",
     "license": "proprietary",
-    "keywords": ["laravel", "azure"],
+    "keywords": [
+        "laravel",
+        "azure"
+    ],
     "authors": [
         {
             "name": "Roel Hemerik",
@@ -16,7 +19,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "thecodingmachine/safe": "^2.5.0",
         "nesbot/carbon": "^2.72.1",
-        "shrd/php-encoding-combinators": "^0.3.0",
+        "shrd/php-encoding-combinators": "^0.4",
         "wimski/laravel-psr-http": "^2.0.0"
     },
     "require-dev": {
@@ -36,7 +39,9 @@
     },
     "extra": {
         "laravel": {
-            "providers": ["Shrd\\Laravel\\Azure\\Identity\\ServiceProvider"],
+            "providers": [
+                "Shrd\\Laravel\\Azure\\Identity\\ServiceProvider"
+            ],
             "aliases": {
                 "AzureCredential": "Shrd\\Laravel\\Azure\\Identity\\Facades\\AzureCredential"
             }
