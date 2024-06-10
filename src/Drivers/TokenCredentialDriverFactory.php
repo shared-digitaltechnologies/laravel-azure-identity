@@ -66,6 +66,8 @@ class TokenCredentialDriverFactory
         "AZURE_SUBSCRIPTION_ID" => "subscription_id",
         "AZURE_CLIENT_ID" => "client_id",
         "AZURE_CLIENT_SECRET" => "client_secret",
+        "AZURE_PRINCIPAL_ID" => "principal_id",
+        "AZURE_MI_RES_ID" => "mi_res_id",
         "AZURE_USERNAME" => "username",
         "AZURE_PASSWORD" => "password",
         "AZURE_CLIENT_CERTIFICATE_PATH" => "client_certificate_path",
@@ -76,7 +78,7 @@ class TokenCredentialDriverFactory
 
     public function fromEnv(?array $envVariables = null): TokenCredentialDriver
     {
-        $envVariables ??= $_ENV;
+        $envVariables ??= getenv();
 
         $config = [];
         foreach (static::$envMap as $envKey => $configKey) {
@@ -222,7 +224,8 @@ class TokenCredentialDriverFactory
             identityEndpointValue: $config['identity_endpoint'],
             identityHeaderValue: $config['identity_header'],
             clientId: $config['client_id'] ?? null,
-            resourceId: $config['resource_id'] ?? null
+            resourceId: $config['resource_id'] ?? $config['mi_res_id'] ?? null,
+            principalId: $config['principal_id'] ?? null,
         );
     }
 

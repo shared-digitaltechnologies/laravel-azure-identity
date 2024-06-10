@@ -68,21 +68,23 @@ class TokenCredentialManager implements TokenCredentialFactory
         $this->defaultCredential = $config->get('azure-identity.credential', 'default');
         $this->credentialConfigs = $config->get('azure-identity.credentials', fn() => [
             "default" => [
-                "driver" => env('AZURE_CREDENTIAL_DRIVER'),
-                "identity_endpoint" => env('IDENTITY_ENDPOINT', env('MSI_ENDPOINT')),
-                "resource_id" => env('AZURE_RESOURCE_ID'),
-                "token_endpoint" => env('AZURE_TOKEN_ENDPOINT'),
-                "tenant_id" => env('AZURE_TENANT_ID'),
-                "additionally_allowed_tenants" => env('AZURE_ADDITIONALLY_ALLOWED_TENANTS'),
-                "subscription_id" => env('AZURE_SUBSCRIPTION_ID'),
-                "client_id" => env('AZURE_CLIENT_ID'),
-                "client_secret" => env('AZURE_CLIENT_SECRET'),
-                "username" => env('AZURE_USERNAME'),
-                "password" => env('AZURE_PASSWORD'),
-                "client_certificate_path" => env('AZURE_CLIENT_CERTIFICATE_PATH'),
-                "client_certificate_password" => env('AZURE_CLIENT_CERTIFICATE_PASSWORD'),
-                "send_certificate_chain" => env('AZURE_CLIENT_SEND_CERTIFICATE_CHAIN'),
-                "az_path" => env('AZ_PATH')
+                "driver" => getenv('AZURE_CREDENTIAL_DRIVER') ?: null,
+                "identity_endpoint" => getenv('IDENTITY_ENDPOINT') ?: getenv('MSI_ENDPOINT') ?: null,
+                "resource_id" => getenv('AZURE_RESOURCE_ID') ?: null,
+                "token_endpoint" => getenv('AZURE_TOKEN_ENDPOINT') ?: null,
+                "tenant_id" => getenv('AZURE_TENANT_ID') ?: null,
+                "additionally_allowed_tenants" => getenv('AZURE_ADDITIONALLY_ALLOWED_TENANTS') ?: null,
+                "subscription_id" => getenv('AZURE_SUBSCRIPTION_ID') ?: null,
+                "client_id" => getenv('AZURE_CLIENT_ID') ?: null,
+                "client_secret" => getenv('AZURE_CLIENT_SECRET') ?: null,
+                "principal_id" => getenv('AZURE_PRINCIPAL_ID') ?: null,
+                "mi_res_id" => getenv('AZURE_MI_RES_ID') ?: null,
+                "username" => getenv('AZURE_USERNAME') ?: null,
+                "password" => getenv('AZURE_PASSWORD') ?: null,
+                "client_certificate_path" => getenv('AZURE_CLIENT_CERTIFICATE_PATH') ?: null,
+                "client_certificate_password" => getenv('AZURE_CLIENT_CERTIFICATE_PASSWORD') ?: null,
+                "send_certificate_chain" => getenv('AZURE_CLIENT_SEND_CERTIFICATE_CHAIN') ?: null,
+                "az_path" => getenv('AZ_PATH') ?: null,
             ],
         ]);
 

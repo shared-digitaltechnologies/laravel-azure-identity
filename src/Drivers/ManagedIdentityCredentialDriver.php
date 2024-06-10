@@ -26,11 +26,13 @@ class ManagedIdentityCredentialDriver extends RequestCredentialDriver
                                          string|null $identityEndpointValue = null,
                                          string|null $identityHeaderValue = null,
                                          string|null $clientId = null,
-                                         string|null $resourceId = null): self
+                                         string|null $resourceId = null,
+                                         string|null $principalId = null): self
     {
         $parameters = [];
         if($clientId) $parameters['client_id'] = $clientId;
-        if($resourceId) $parameters['mi_res_id'] = $resourceId;
+        elseif($resourceId) $parameters['mi_res_id'] = $resourceId;
+        elseif($principalId) $parameters['principal_id'] = $principalId;
 
         return new self(
             httpClient: $httpClient,
