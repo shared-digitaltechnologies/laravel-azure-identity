@@ -19,7 +19,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "thecodingmachine/safe": "^2.5.0",
         "nesbot/carbon": "^2.72.1",
-        "shrd/php-encoding-combinators": "^0.4",
+        "shrd/php-encoding-combinators": "^0.5.1",
         "wimski/laravel-psr-http": "^2.0.0"
     },
     "require-dev": {
